@@ -63,4 +63,12 @@ public class TokenServiceTests
 
         Assert.False(result.IsValid);
     }
+
+
+    [Fact]
+    public void Default_expiry_is_one_12_hour_shift()
+    {  
+        Assert.Equal(720, new JwtOptions().ExpiryMinutes);
+    }
+
 }

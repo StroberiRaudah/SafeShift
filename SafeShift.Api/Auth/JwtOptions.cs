@@ -10,5 +10,5 @@ public class JwtOptions
     public string Issuer { get; set; } = "SafeShift";
     public string Audience { get; set; } = "SafeShift.Web";
     public string Key { get; set; } = "";
-    public int ExpiryMinutes { get; set; } = 480;   // one 8-hour shift
+    public int ExpiryMinutes { get; set; } = 720;   // one 12-hour shift
 }
