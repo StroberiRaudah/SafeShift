@@ -31,6 +31,9 @@ public class SafeShiftDbContext(DbContextOptions<SafeShiftDbContext> options)
 
         builder.Entity<AppUser>(u =>
         {
+            // Identity Ids are GUID strings (36 chars). The default nvarchar(450) is too big
+            // for the spatial index on UserLocations, whose primary key is the user Id.
+            u.Property(x => x.Id).HasMaxLength(36);
             u.Property(x => x.FullName).HasMaxLength(100);
             u.HasOne(x => x.Site).WithMany().HasForeignKey(x => x.SiteId);
         });
@@ -86,6 +89,8 @@ public class SafeShiftDbContext(DbContextOptions<SafeShiftDbContext> options)
         builder.Entity<UserLocation>(l =>
         {
             l.HasKey(x => x.UserId);
+            // One row per user: the primary key is also the link to the user (one-to-one).
+            l.HasOne(x => x.User).WithOne().HasForeignKey<UserLocation>(x => x.UserId);
             l.Property(x => x.Location).HasColumnType("geography");
             // The spatial index is added by hand in the first migration (EF can't create it).
         });
