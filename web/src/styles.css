@@ -1,0 +1,272 @@
+/* Design tokens from the brief (section 8): light glass theme for outdoor daylight. */
+:root {
+  --bg: #e6eaf0;
+  --card: rgba(255, 255, 255, 0.94);
+  --border: rgba(15, 27, 45, 0.1);
+  --shadow: 0 1px 2px rgba(15, 27, 45, 0.06), 0 6px 20px rgba(15, 27, 45, 0.07);
+  --radius: 20px;
+  --navy: #0f1b2d;
+  --muted: rgba(15, 27, 45, 0.62); /* never lighter, for contrast */
+  --red: #d92d20;
+  --red-dark: #b42318;
+  --amber: #b54708;
+  --green: #067647;
+  --blue: #1570ef;
+  --touch: 44px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--navy);
+  background:
+    radial-gradient(40rem 30rem at 10% -10%, rgba(21, 112, 239, 0.14), transparent 70%),
+    radial-gradient(36rem 28rem at 110% 10%, rgba(181, 71, 8, 0.1), transparent 70%),
+    var(--bg);
+  background-attachment: fixed;
+}
+
+h1,
+h2 {
+  margin: 0 0 4px;
+}
+h1 {
+  font-weight: 300;
+  font-size: 1.9rem;
+}
+h2 {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+p {
+  margin: 0;
+}
+
+.muted {
+  color: var(--muted);
+}
+.small {
+  font-size: 0.875rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  backdrop-filter: blur(12px);
+}
+
+/* Status = coloured dot + word, never colour alone. */
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.dot-red { background: var(--red); }
+.dot-amber { background: var(--amber); }
+.dot-green { background: var(--green); }
+.dot-blue { background: var(--blue); }
+
+/* ---- Buttons and form fields (44px touch targets) ---- */
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  width: 100%;
+  min-height: var(--touch);
+  border: 0;
+  border-radius: 12px;
+  background: var(--navy);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-primary:disabled {
+  opacity: 0.55;
+}
+
+.btn-ghost {
+  min-height: var(--touch);
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--navy);
+  font-weight: 500;
+}
+
+label {
+  display: block;
+  margin: 16px 0 6px;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+input {
+  width: 100%;
+  min-height: var(--touch);
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+  color: var(--navy);
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.form-error {
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(217, 45, 32, 0.08);
+  color: var(--red-dark);
+  font-weight: 500;
+}
+
+form .btn-primary {
+  margin-top: 20px;
+}
+
+code {
+  font-size: 0.85em;
+}
+
+/* ---- Login ---- */
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 28px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.demo-hint {
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+/* ---- Worker home (phone) ---- */
+
+.phone {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+  display: grid;
+  gap: 16px;
+}
+.phone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.report-card {
+  display: grid;
+  gap: 12px;
+}
+.tile-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.tile {
+  min-height: 72px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--navy);
+}
+.lti {
+  text-align: center;
+}
+.lti-number,
+.summary-number {
+  font-size: 2.4rem;
+  font-weight: 300;
+}
+
+/* ---- Supervisor dashboard (web) ---- */
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+  padding: 20px;
+  min-height: 100vh;
+}
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.sidebar nav {
+  display: grid;
+  gap: 4px;
+  flex: 1;
+}
+.sidebar nav a,
+.sidebar nav span {
+  display: flex;
+  align-items: center;
+  min-height: var(--touch);
+  padding: 0 12px;
+  border-radius: 12px;
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 500;
+}
+.sidebar nav a.active {
+  background: var(--navy);
+  color: #fff;
+}
+.sidebar nav .nav-soon {
+  color: var(--muted);
+}
+.dashboard-main {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 760px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+  .sidebar nav {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
