@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SafeShift.Api.Tests/SafeShift.Api.Tests.csproj" />
+  <Project Path="SafeShift.Api/SafeShift.Api.csproj" />
+</Solution>
