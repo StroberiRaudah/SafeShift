@@ -1,0 +1,60 @@
+# CI = every push and pull request is built and tested on GitHub's computers.
+# Two jobs run side by side: one for the .NET API, one for the React web app.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  api:
+    name: API (build + test)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Install .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore packages
+        run: dotnet restore SafeShift.slnx
+
+      - name: Build
+        run: dotnet build SafeShift.slnx --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test SafeShift.slnx --no-build --configuration Release
+
+  web:
+    name: Web (lint + test + build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web   # npm commands run where package.json is
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Install Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
