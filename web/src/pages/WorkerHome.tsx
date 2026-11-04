@@ -1,5 +1,5 @@
 import { useAuth } from '../auth/AuthContext'
-import { firstName, greeting } from '../utils/greeting'
+import { firstName, greeting, shiftName } from '../utils/greeting'
 
 // Phone screen 2 (Home). Placeholder for Week 1: the buttons come alive in Week 2.
 export function WorkerHome() {
@@ -13,7 +13,7 @@ export function WorkerHome() {
           <p className="muted small">{greeting()},</p>
           <h1>{firstName(user.fullName)}</h1>
           <p className="muted small">
-            <span className="dot dot-green" aria-hidden="true" /> {user.siteName ?? 'No site'} · Day shift
+            <span className="dot dot-green" aria-hidden="true" /> {user.siteName ?? 'No site'} · {shiftName()}
           </p>
         </div>
         <button type="button" className="btn-ghost" onClick={logout}>
