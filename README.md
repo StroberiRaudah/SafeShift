@@ -1,5 +1,8 @@
 # SafeShift
 
+![CI](https://github.com/StroberiRaudah/SafeShift/actions/workflows/ci.yml/badge.svg)
+
+
 An **offline-first HSE (Health, Safety & Environment) incident reporting system** for oil and gas and industrial sites.
 Workers report hazards in seconds, even without internet. The site PIC is notified straight away, and supervisors make sure every problem gets fixed.
 
