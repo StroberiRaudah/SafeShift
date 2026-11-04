@@ -6,6 +6,13 @@ export function greeting(now: Date = new Date()): string {
   return 'Good evening'
 }
 
+export function shiftName(now: Date = new Date()): string {
+  const hour = now.getHours()
+  if (hour >= 7 && hour < 19) return 'day shift'
+  return 'night shift'
+    
+  }
+
 // "Aiman Hakim" → "Aiman"
 export function firstName(fullName: string): string {
   return fullName.trim().split(/\s+/)[0] ?? ''
