@@ -1,5 +1,7 @@
 # SafeShift
 
+**Live demo:** https://jolly-forest-04538c500.4.azurestaticapps.net
+
 ![CI](https://github.com/StroberiRaudah/SafeShift/actions/workflows/ci.yml/badge.svg)
 
 
