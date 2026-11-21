@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ---- 1. Register services (things the app can use) ----
 
-builder.Services.AddControllers();
+// Enums travel as words in JSON ("Hazard", "High"), the same as in the database.
+builder.Services.AddControllers()
+    .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddOpenApi();
 
 // Database: Azure SQL / SQL Server. UseNetTopologySuite enables the geography (GPS) type.
