@@ -45,6 +45,8 @@ public class IncidentsController(SafeShiftDbContext db) : ControllerBase   // bl
             ReportedAt = request.ReportedAt,
             SyncedAt = DateTimeOffset.UtcNow,
             ReportedById = user.Id,
+            UpdatedAt = DateTimeOffset.UtcNow,
+
             SiteId = user.SiteId.Value
         };
         var count = await  db.Incidents.CountAsync();
@@ -55,4 +57,25 @@ public class IncidentsController(SafeShiftDbContext db) : ControllerBase   // bl
 
         return Ok(new { incident.Id, incident.ReferenceNo, alreadySaved=false});
            }
+
+   //getapi/incidents/mine: list the reports this worker sent, newest first
+    [HttpGet("mine")]                               // blank 4: Get or Post?
+    public async Task<IActionResult> Mine()  // no borang needed, why? because we are not sending any data in the body of the request, we are just retrieving data based on the authenticated user.
+    {
+        // 5a. who is calling? (copy from Create)
+        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+
+        // 5b. find this worker's incidents
+        var incidents = await db.Incidents
+            .Where(i => i.ReportedById == userId)     // filter: ReportedById equals userId
+            .OrderByDescending(i => i.ReportedAt)     // order: newest ReportedAt first
+            .ToListAsync();                           // get many rows
+
+        // 5c. (nothing to save, we're only reading)
+
+        // 5d. reply with the list → Ok(...)
+        return Ok(incidents);
+    }
 }
+
+    
