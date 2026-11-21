@@ -1,0 +1,11 @@
+{
+  // Hide folders that are generated automatically (by dotnet build / npm install),
+  // so the Explorer only shows the real project files. They are still on disk.
+  "files.exclude": {
+    "**/bin": true,
+    "**/obj": true,
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/.vite": true
+  }
+}
